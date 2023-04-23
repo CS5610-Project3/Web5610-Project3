@@ -17,12 +17,12 @@ connectDB();
 // app.use(credentials);
 
 // Cross-origin resource sharing
-const corsOptions = {
-  origin: "http://localhost:3000",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: "http://localhost:3000",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+app.use(cors());
 
 // Built-in middleware - Body parser
 app.use(express.urlencoded({ extended: true }));
@@ -37,10 +37,9 @@ app.use(cookieParser());
 app.use(logger("dev"));
 
 // Routes
-app.use("/signup", require("./routes/signup"));
-app.use("/login", require("./routes/login"));
-app.use("/refresh", require("./routes/refresh"));
-app.use("/logout", require("./routes/logout"));
+app.use("/api/users/", require("./routes/users"));
+app.use("/api/posts/", require("./routes/posts"));
+
 
 // Middleware for verifying JWT
 app.use(verifyJWT);

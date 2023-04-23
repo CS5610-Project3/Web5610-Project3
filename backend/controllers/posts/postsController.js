@@ -1,4 +1,4 @@
-const Post = require("../models/Post");
+const Post = require("../../models/Post");
 
 // Get all posts from newest to oldest
 const getAllPosts = async (req, res) => {

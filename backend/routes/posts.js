@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const verifyJWT = require("../middleware/verifyJWT");
-const postsController = require("../controllers/postsController");
+const postsController = require("../controllers/posts/postsController");
 
 // Get all posts from newest to oldest
 router.get("/", verifyJWT, postsController.getAllPosts);
