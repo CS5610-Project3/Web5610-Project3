@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 
 const pages = ["SignUp", "SignIn"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const pagesAfterSignIn = ["Home", "About", "Community", "Contact"];
+const pagesAfterSignIn = ["Home", "About", "Community", "Contact", "Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
