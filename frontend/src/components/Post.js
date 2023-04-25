@@ -9,10 +9,23 @@ import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useState } from "react";
 
 
 
 export default function Post() {
+  const [content, setContent] = useState("Content");
+
+  function editContent() {
+    setContent("Test Edit");
+    // call api to change whole post(including timestamp)
+  }
+
+  function deleteContent() {
+    setContent("Test Delete");
+    // call api to delete whole post
+  }
+
   return (
     <Card sx={{ maxWidth: 345 }}>
       <CardHeader
@@ -26,16 +39,14 @@ export default function Post() {
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
-          This impressive paella is a perfect party dish and a fun meal to cook
-          together with your guests. Add 1 cup of frozen peas along with the mussels,
-          if you like.
+          {content}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="edit">
+        <IconButton aria-label="edit" onClick={editContent}>
           <EditIcon />
         </IconButton>
-        <IconButton aria-label="delete">
+        <IconButton aria-label="delete" onClick={deleteContent}>
           <DeleteIcon />
         </IconButton>
       </CardActions>
