@@ -16,12 +16,13 @@ import { Link } from "react-router-dom";
 
 const pages = ["SignUp", "SignIn"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-const pagesAfterSignIn = ["Home", "About", "Community", "Contact", "Logout"];
+const pagesAfterSignIn = ["Logout"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const [isSignedIn, setIsSignedIn] = React.useState(false);
+    const [isLogedIn, setIsLogedIn] = React.useState(false);
 
 
     const handleOpenNavMenu = (event) => {
@@ -48,7 +49,12 @@ function ResponsiveAppBar() {
       handleCloseUserMenu();
   };
 
-  return (
+    function handleLogIn() {
+        setIsLogedIn(true);
+
+    }
+
+    return (
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
@@ -72,62 +78,72 @@ function ResponsiveAppBar() {
           </Typography>
 
             {isSignedIn && (
-                <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-                    {pagesAfterSignIn.map((page) => (
-                        <Link to={`/${page.toLowerCase()}`} key={page}>
-                            <Button
-                                key={page}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: "white", display: "block" }}
-                            >
-                                {page}
-                            </Button>
-                        </Link>
-                    ))}
-                </Box>
-            )}
-
-            {isSignedIn ? (
-                <Box sx={{ flexGrow: 0 }}>
-                    <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                        </IconButton>
-                    </Tooltip>
-                    <Menu
-                        sx={{ mt: "45px" }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                            vertical: "top",
-                            horizontal: "right",
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: "top",
-                            horizontal: "right",
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                    >
-                        {settings.map((setting) => (
-                            <MenuItem
-                                key={setting}
-                                onClick={setting === "Sign out" ? handleSignOut : handleCloseUserMenu}
-                            >
-                                <Typography textAlign="center">{setting}</Typography>
-                            </MenuItem>
+                <>
+                    <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+                        {pagesAfterSignIn.map((page) => (
+                            <Link to={`/${page.toLowerCase()}`} key={page}>
+                                <Button
+                                    key={page}
+                                    onClick={handleCloseNavMenu}
+                                    sx={{ my: 2, color: "white", display: "block" }}
+                                >
+                                    {page}
+                                </Button>
+                            </Link>
                         ))}
-                    </Menu>
-                </Box>
-            ) : (
-                <Button color="inherit" onClick={handleSignIn}>
-                    Sign In
-                </Button>
-
+                    </Box>
+                    <Box sx={{ flexGrow: 0 }}>
+                        <Tooltip title="Open settings">
+                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            </IconButton>
+                        </Tooltip>
+                        <Menu
+                            sx={{
+                                mt: "45px",
+                            }}
+                            id="menu-appbar"
+                            anchorEl={anchorElUser}
+                            anchorOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            keepMounted
+                            transformOrigin={{
+                                vertical: "top",
+                                horizontal: "right",
+                            }}
+                            open={Boolean(anchorElUser)}
+                            onClose={handleCloseUserMenu}
+                        >
+                            {settings.map((setting) => (
+                                <MenuItem
+                                    key={setting}
+                                    onClick={
+                                        setting === "Sign out" ? handleSignOut : handleCloseUserMenu
+                                    }
+                                >
+                                    <Typography textAlign="center">{setting}</Typography>
+                                </MenuItem>
+                            ))}
+                        </Menu>
+                    </Box>
+                </>
             )}
 
-          {/*<Box sx={{ flexGrow: 0 }}>*/}
+            {!isSignedIn && (
+                <>
+                    <Button color="inherit" onClick={handleSignIn}>
+                        Sign Up
+                    </Button>
+                    <Button color="inherit" onClick={handleSignIn}>
+                        Log In
+                    </Button>
+                </>
+            )}
+
+
+            {/*<Box sx={{ flexGrow: 0 }}>*/}
           {/*  <Tooltip title="Open settings">*/}
           {/*    <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>*/}
           {/*      <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />*/}
