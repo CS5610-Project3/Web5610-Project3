@@ -90,7 +90,7 @@ export default function UserInformation() {
                             </Button>
                         </div>
                     </Stack>
-                    {/*<CompaniesSearch />*/}
+                    {/*<SearchBar />*/}
                     <Grid
                         container
                         spacing={3}
